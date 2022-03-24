@@ -15,11 +15,22 @@ BUTTON_COLOR = '#19A7F2'
 root = tk.Tk()
 apps = []
 labels = []
+
+canvas = tk.Canvas(root, height= HEIGHT, width=  WIDTH, bg = BG)
+canvas.pack()
+
+frame = tk.Frame(root, bg= 'white')
+frame.place(relwidth= 0.8, relheight= 0.8, relx= 0.1, rely= 0.1)
+
 if os.path.isfile('save.txt'):
     with open('save.txt', 'r') as f:
         tempApps = f.read()
         tempApps = tempApps.split(',')
         apps = [x for x in tempApps if x.strip()]
+        for app in apps:
+            label = tk.Label(frame, text= app, bg= 'grey')
+            labels.append(label)
+            label.pack()
 
 def addApp():
 
@@ -46,11 +57,11 @@ def clearApps():
         label.destroy()
 
     
-canvas = tk.Canvas(root, height= HEIGHT, width=  WIDTH, bg = BG)
-canvas.pack()
+# canvas = tk.Canvas(root, height= HEIGHT, width=  WIDTH, bg = BG)
+# canvas.pack()
 
-frame = tk.Frame(root, bg= 'white')
-frame.place(relwidth= 0.8, relheight= 0.8, relx= 0.1, rely= 0.1)
+# frame = tk.Frame(root, bg= 'white')
+# frame.place(relwidth= 0.8, relheight= 0.8, relx= 0.1, rely= 0.1)
 
 openFile = tk.Button(root, text='Open File', padx= 30, 
                     pady= 5, fg= 'white', bg= BUTTON_COLOR, command= addApp)
